@@ -1,0 +1,2 @@
+#!/sbin/sh
+sysctl -w net.inet.ip.mcast_ttl=64

@@ -1,3 +1,4 @@
+.DS_Store
 *.gem
 *.rbc
 .bundle
@@ -16,3 +17,14 @@ tmp
 .yardoc
 _yardoc
 doc/
+
+# packer
+packer/packer_cache/
+packer_cache/
+crash.log
+
+# images
+images/
+
+# builds
+*.box
