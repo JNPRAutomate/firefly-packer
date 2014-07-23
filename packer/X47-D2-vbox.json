@@ -3,8 +3,7 @@
     {
       "boot_wait": "60s",
       "boot_command": [
-        "root<enter><wait><wait>",
-        "Juniper<enter><wait5>",
+        "root<enter><wait5>",
         "sysctl -w net.inet.ip.mcast_ttl=64<enter><wait5>",
         "echo \"#!/sbin/sh\" >> /etc/rc.custom<enter><wait>",
         "echo \"sysctl -w net.inet.ip.mcast_ttl=64\" >> /etc/rc.custom<enter><wait>",
