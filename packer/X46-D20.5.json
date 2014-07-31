@@ -69,8 +69,9 @@
   ],
   "post-processors": [
     {
-      "output": "builds/{{.Provider}}/junos-vsrx-12.1X46-D20.5-domestic-baseconfig.box",
-      "type": "vagrant"
+      "output": "builds/{{.Provider}}/junos-vsrx-12.1X46-D20.5-{{.Provider}}.box",
+      "type": "vagrant",
+      "vagrantfile_template": "vagrantfiles/X46-D20.5.Vagrantfile"
     }
   ],
   "provisioners": [
