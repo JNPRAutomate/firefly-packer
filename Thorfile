@@ -1,63 +1,61 @@
+# vi: ft=ruby
+
 require 'thor'
 require 'fileutils'
 require 'timeout'
-require 'digest'
-require 'digest/sha1'
 
-ffp_vmw_image = 'images/firefly/download'
-ffp_vmw_sha1 = "ec6c892fabfb07e8df5e8a68c78e3f5aa62b3fd4"
-ffp_image_dir = "./images/firefly"
-ffp_download_dir = "./images/firefly/download"
+class Packer < Thor
 
-
-class Firefly < Thor
-
-  desc "prep", "Prep Firefly Perimeter images"
-  def prep
-    ffp_vmw_image = 'images/firefly/download'
-    Dir.chdir ffp_vmw_image do
-      ovas = Dir.glob("*.ova")
-      ovas.each do |ova|
-        `tar xzf #{ova}`
-        puts "#{ova}"
+  desc 'validate', "Validate all the packer templates"
+  def validate
+    Dir.chdir './packer' do
+      templates = Dir.glob("*.json")
+      templates.each do |template|
+        puts "#{template}"
+        unless system "packer validate #{template}"
+          fail "Validation failed!"
+        end
+        puts "\n"
       end
     end
   end
 
-
-end
-
-class Packer < Thor
-
-  desc "validate", "Validate Packer templates"
-  def validate
-    Dir.chdir './packer' do
-    templates = Dir.glob("*.json")
-    templates.each do |template|
-      puts "#{template}"
-    unless system "packer validate #{template}"
-        fail "Validation failed"
-    end
-    puts "\n"
-    end
-  end
-  end
-
-  desc "clean", "Clean up packer cache + builds"
+  desc 'clean', "Description goes here"
   def clean(what)
     if what == "cache"
-      Fileutils.rm_rf(Dir.glob('./packer/packer_cache/*'))
+      FileUtils.rm_rf(Dir.glob('./packer/packer_cache/*'))
     elsif what == "boxes"
-      Fileutils.rm_rf(Dir.glob('./packer/*.box'))
+      FileUtils.rm_rf(Dir.glob('./packer/*.box'))
     end
   end
 
-  desc "build", "Build Firefly Perimeter images"
+  desc 'build', "Execute the packer builder"
+  option :os, :banner => "<os>", :default => "*"
+  option :ver, :banner => "<version>", :default => "*"
+  option :bits, :banner => "<bits>"
+  option :only, :banner => "<only>"
+
+
   def build
     Dir.chdir './packer' do
-      templates = Dir.glob('*.json')
-      templates.each do |template|
-        system = "packer build #{template}"
+
+      if options[:bits] 
+        processor = options[:bits] == "64" ? "{amd64,x86_64}" : "i386"
+      else
+        processor = "*"
+      end
+
+      templates = Dir.glob("#{options[:os]}-#{options[:ver]}-#{processor}.json")
+
+      if options[:only]
+        templates.each do |template|
+          name = template.chomp(".json").split("-")
+          system "packer build -only=#{name[0]}-#{name[1]}-#{name[2]}-#{options[:only]} #{template}"
+        end
+      else
+        templates.each do |template|
+          system "packer build #{template}"
+        end
       end
     end
   end

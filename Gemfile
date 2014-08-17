@@ -1,7 +1,7 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "rake"
+gem 'rake'
 
 group :test do
-  gem "thor"
+  gem 'thor'
 end
