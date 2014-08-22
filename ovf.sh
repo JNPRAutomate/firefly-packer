@@ -1,7 +1,16 @@
-#!/bin/bash
-ovftool --acceptAllEulas images/firefly/download/junos-vsrx-12.1X44-D10.4-domestic.ova images/firefly/vmx/X44-D10.4/junos-vsrx-12.1X44-D10.4-domestic.vmx
-ovftool --acceptAllEulas images/firefly/download/junos-vsrx-12.1X46-D10.2-domestic.ova images/firefly/vmx/X46-D10.2/junos-vsrx-12.1X46-D10.2-domestic.vmx
-ovftool --acceptAllEulas images/firefly/download/junos-vsrx-12.1X46-D15.3-domestic.ova images/firefly/vmx/X46-D15.3/junos-vsrx-12.1X46-D15.3-domestic.vmx
-ovftool --acceptAllEulas images/firefly/download/junos-vsrx-12.1X46-D15.3-domestic.ova images/firefly/vmx/X46-D20.5/junos-vsrx-12.1X46-D20.5-domestic.vmx
-ovftool --acceptAllEulas images/firefly/download/junos-vsrx-12.1X47-D1.1-domestic.ova images/firefly/vmx/X47-D1.1/junos-vsrx-12.1X47-D1.1-domestic.vmx
-ovftool --acceptAllEulas images/firefly/download/junos-vsrx-12.1X47-D2-domestic.ova images/firefly/vmx/X47-D2/junos-vsrx-12.1X47-D2-domestic.vmx
+#!/usr/bin/env bash
+
+DOWNLOADDIR=images/firefly/download
+VMXDIR=images/firefly/vmx
+VERSIONS="X44-D10.4
+X46-D10.2
+X46-D20.5
+"
+
+for v in $VERSIONS
+do
+	echo "Processing $v"
+	ovftool --acceptAllEulas $DOWNLOADDIR/junos-vsrx-12.1$v-domestic.ova $VMXDIR/$v/junos-vsrx-$v-domestic.vmx
+done
+
+ovftool --acceptAllEulas images/firefly/download/junos-vsrx-12.1X46-D15.3.b-domestic.ova images/firefly/vmx/X46-D15.3/junos-vsrx-12.1X46-D15.3-domestic.vmx

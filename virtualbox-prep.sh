@@ -1,19 +1,28 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# replace with Thor commands that automagically fix the .OVFs, and updates the sha1sum in the .MF, etc.
+DOWNLOADDIR=images/firefly/download
+OVADIR=images/firefly/fixedova
+FIXESDIR=fixes
+# OSX OVFTOOL is in /Applications/VMware\ OVF\ Tool/ovftool
+# ... or another /Applications folder inside VMware Fusion
+OVFTOOL=ovftool
+OVAPREFIX=junos-vsrx-12.1
+OVASUFFIX=-domestic
+VERSIONS="X46-D10.2
+X46-D20.5
+"
+PATCHEDVER=X46-D15.3
 
-tar xvf images/firefly/download/junos-vsrx-12.1X46-D10.2-domestic.ova -C images/firefly/fixedova/X46-D10.2
-tar xvf images/firefly/download/junos-vsrx-12.1X46-D15.3-domestic.ova -C images/firefly/fixedova/X46-D15.3
-tar xvf images/firefly/download/junos-vsrx-12.1X46-D20.5-domestic.ova -C images/firefly/fixedova/X46-D20.5
-tar xvf images/firefly/download/junos-vsrx-12.1X47-D1.1-domestic.ova -C images/firefly/fixedova/X47-D1.1
-tar xvf images/firefly/download/junos-vsrx-12.1X47-D2-domestic.ova -C images/firefly/fixedova/X47-D2
-cp fixes/junos-vsrx-12.1X46-D10.2-domestic* images/firefly/fixedova/X46-D10.2
-cp fixes/junos-vsrx-12.1X46-D15.3-domestic* images/firefly/fixedova/X46-D15.3
-cp fixes/junos-vsrx-12.1X46-D20.5-domestic* images/firefly/fixedova/X46-D20.5
-cp fixes/junos-vsrx-12.1X47-D1.1-domestic* images/firefly/fixedova/X47-D1.1
-cp fixes/junos-vsrx-12.1X47-D2-domestic* images/firefly/fixedova/X47-D2
-ovftool images/firefly/fixedova/X46-D10.2/junos-vsrx-12.1X46-D10.2-domestic.ovf images/firefly/fixedova/junos-vsrx-12.1X46-D10.2-domestic.ova
-ovftool images/firefly/fixedova/X46-D15.3/junos-vsrx-12.1X46-D15.3-domestic.ovf images/firefly/fixedova/junos-vsrx-12.1X46-D15.3-domestic.ova
-ovftool images/firefly/fixedova/X46-D20.5/junos-vsrx-12.1X46-D20.5-domestic.ovf images/firefly/fixedova/junos-vsrx-12.1X46-D20.5-domestic.ova
-ovftool images/firefly/fixedova/X47-D1.1/junos-vsrx-12.1X47-D1.1-domestic.ovf images/firefly/fixedova/junos-vsrx-12.1X47-D1.1-domestic.ova
-ovftool images/firefly/fixedova/X47-D2/junos-vsrx-12.1X47-D2-domestic.ovf images/firefly/fixedova/junos-vsrx-12.1X47-D2-domestic.ova
+for v in $VERSIONS
+
+do
+	echo -e "\n\n\e[1mProcessing $v:\e[0m\n"
+	tar xvf $DOWNLOADDIR/$OVAPREFIX$v$OVASUFFIX.ova -C $OVADIR/$v
+	cp $FIXESDIR/$OVAPREFIX$v$OVASUFFIX* $OVADIR/$v
+	$OVFTOOL $OVADIR/$v/$OVAPREFIX$v$OVASUFFIX.ovf $OVADIR/$OVAPREFIX$v$OVASUFFIX.ova
+done
+
+echo -e "\n\n\e[1mProcessing $PATCHEDVER:\e[0m\n"
+tar xvf $DOWNLOADDIR/$OVAPREFIX$PATCHEDVER.b$OVASUFFIX.ova -C $OVADIR/$PATCHEDVER
+cp $FIXESDIR/$OVAPREFIX$PATCHEDVER$OVASUFFIX* $OVADIR/$PATCHEDVER
+$OVFTOOL $OVADIR/$PATCHEDVER/$OVAPREFIX$PATCHEDVER$OVASUFFIX.ovf $OVADIR/$OVAPREFIX$PATCHEDVER$OVASUFFIX.ova
