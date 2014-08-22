@@ -24,7 +24,9 @@ packer_cache/
 crash.log
 
 # images
-images/
+*.ova
+*.vmx
+*.vmdk
 
 # builds
 *.box
