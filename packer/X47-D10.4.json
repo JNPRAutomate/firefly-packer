@@ -1,0 +1,86 @@
+{
+  "builders": [
+    {
+      "boot_wait": "60s",
+      "boot_command": [
+        "root<enter><wait5>",
+        "cli<enter><wait><wait>",
+        "conf<enter><wait>",
+        "set system services netconf ssh<enter><wait>",
+        "set system root-authentication plain-text-password<enter><wait>",
+        "Juniper<enter>Juniper<enter><wait>",
+        "set system root-authentication ssh-rsa \"ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key\"<enter><wait10>",
+        "set system login user vagrant class super-user<enter><wait>",
+        "set system login user vagrant authentication ssh-rsa \"ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key\"<enter><wait10>",
+        "set interfaces ge-0/0/0.0 family inet dhcp<enter><wait>",
+        "set security zones security-zone untrust interfaces ge-0/0/0.0 host-inbound-traffic system-services ping<enter><wait>",
+        "set security zones security-zone untrust interfaces ge-0/0/0.0 host-inbound-traffic system-services netconf<enter><wait>",
+        "commit and-quit<enter><wait10>",
+        "exit<enter><wait>"
+      ],
+      "type": "vmware-vmx",
+      "source_path": "../images/firefly/vmx/X47-D10.4/junos-vsrx-12.1X47-D10.4-domestic.vmx",
+      "ssh_username": "root",
+      "ssh_password": "Juniper",
+      "vnc_port_min": "5800",
+      "vnc_port_max": "5900",
+      "shutdown_command": "shutdown -p now",
+      "vmx_data": {
+        "ethernet0.connectionType": "nat"
+      }
+    },
+    {
+      "boot_wait": "60s",
+      "boot_command": [
+        "root<enter><wait5>",
+        "sysctl -w net.inet.ip.mcast_ttl=64<enter><wait5>",
+        "echo \"#!/sbin/sh\" >> /etc/rc.custom<enter><wait>",
+        "echo \"sysctl -w net.inet.ip.mcast_ttl=64\" >> /etc/rc.custom<enter><wait>",
+        "chmod 777 /cf/etc/rc.custom<enter><wait>",
+        "cli<enter><wait><wait>",
+        "conf<enter><wait>",
+        "set system services netconf ssh<enter><wait>",
+        "set system root-authentication plain-text-password<enter><wait>",
+        "Juniper<enter>Juniper<enter><wait>",
+        "set system root-authentication ssh-rsa \"ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key\"<enter><wait10>",
+        "set system login user vagrant class super-user<enter><wait>",
+        "set system login user vagrant authentication ssh-rsa \"ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key\"<enter><wait10>",
+        "set interfaces ge-0/0/0.0 family inet dhcp<enter><wait>",
+        "set security zones security-zone untrust interfaces ge-0/0/0.0 host-inbound-traffic system-services ping<enter><wait>",
+        "set security zones security-zone untrust interfaces ge-0/0/0.0 host-inbound-traffic system-services netconf<enter><wait>",
+        "commit and-quit<enter><wait10>",
+        "exit<enter><wait>"
+      ],
+      "type": "virtualbox-ovf",
+      "guest_additions_mode": "disable",
+      "source_path": "../images/firefly/fixedova/junos-vsrx-12.1X47-D10.4-domestic.ova",
+      "ssh_username": "root",
+      "ssh_password": "Juniper",
+      "shutdown_command": "shutdown -p now",
+      "vboxmanage": [
+         ["modifyvm", "{{.Name}}", "--memory", "2048"],
+         ["modifyvm", "{{.Name}}", "--cpus", "2"],
+         ["modifyvm", "{{.Name}}", "--nictype1", "virtio"],
+         ["modifyvm", "{{.Name}}", "--nic1", "nat"],
+         ["modifyvm", "{{.Name}}", "--nicpromisc1", "allow-all"],
+         ["modifyvm", "{{.Name}}", "--boot1", "disk"],
+         ["modifyvm", "{{.Name}}", "--uart1", "0x3F8", "4"],
+         ["modifyvm", "{{.Name}}", "--uartmode1", "disconnected"]
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "output": "../builds/{{.Provider}}/junos-vsrx-12.1X47-D10.4-{{.Provider}}.box",
+      "type": "vagrant",
+      "vagrantfile_template": "vagrantfiles/X47-D10.4.Vagrantfile"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "scripts/junos/rc.custom",
+      "destination": "/etc/rc.custom"
+    }
+  ]
+}
