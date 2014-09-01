@@ -1,0 +1,6 @@
+# generated files
+*.mf
+*.ovf
+*.vmdk
+*.cert
+certchain.pem
