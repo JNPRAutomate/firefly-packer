@@ -5,6 +5,7 @@ VMXDIR=images/firefly/vmx
 VERSIONS="X44-D10.4
 X46-D10.2
 X46-D20.5
+X47-D10.4
 "
 
 for v in $VERSIONS
