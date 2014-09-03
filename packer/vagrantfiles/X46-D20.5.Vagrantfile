@@ -22,4 +22,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # use tcsh as login shell (as /bin/csh -l)
   # yes, it's really tcsh
   config.ssh.shell = 'csh -l'
+  # adding in additonal NICs
+  # The NICs will need to be provisioned manually within the VM.
+  # To add additonal VMs into these networks use the same VM intnet names as defined. This is supported in virtualbox only.
+  config.vm.network "private_network", ip: "0.0.0.0", auto_config: false, virtualbox__intnet: "net1"
+  config.vm.network "private_network", ip: "0.0.0.0", auto_config: false, virtualbox__intnet: "net2"
+  config.vm.network "private_network", ip: "0.0.0.0", auto_config: false, virtualbox__intnet: "net3"
+  config.vm.network "private_network", ip: "0.0.0.0", auto_config: false, virtualbox__intnet: "net4"
+  config.vm.network "private_network", ip: "0.0.0.0", auto_config: false, virtualbox__intnet: "net5"
+  config.vm.network "private_network", ip: "0.0.0.0", auto_config: false, virtualbox__intnet: "net6"
+  config.vm.network "private_network", ip: "0.0.0.0", auto_config: false, virtualbox__intnet: "net7"
 end

@@ -8,10 +8,10 @@ Packer scripts for building cloud-automatation-friendly [Firefly Perimeter](http
 
 Please see the [Packer documentation](http://www.packer.io/docs) if you plan on building these images yourself!
 
- 1. Install our packer fork for [Linux](https://s3-us-west-2.amazonaws.com/packerfork/linux/packer-jnprautomate-lin-current.zip) or [Mac OSX](https://s3-us-west-2.amazonaws.com/packerfork/osx/packer-jnprautomate-osx-current.zip). 
+ 1. Install our packer fork for [Linux](https://s3-us-west-2.amazonaws.com/packerfork/linux/packer-jnprautomate-lin-current.zip) or [Mac OSX](https://s3-us-west-2.amazonaws.com/packerfork/osx/packer-jnprautomate-osx-current.zip).
  2. Clone this repo, e.g. `git clone https://github.com/JNPRAutomate/firefly-packer`
  3. Procure Firefly images, and place in `images/firefly/download` in the `firefly-packer` git directory
- 4. Run the `ovf.sh` and `virtualbox-prep.sh` scripts to prepare the images.  These will all be rolled into one script with better logic, and this will also download the source .OVA files.
+ 4. Run the `image-prep.sh` script to prepare the images.  Ideally this will also download the source .OVA files in the future.
  4. Modify the templates for your environment, if desired
  5. Switch to the `./packer` sub-directory:
   5. `packer validate <templatename>` will validate the JSON templates provided.  If any of the source VMs, files, scripts, or automation inputs are missing, `validate` will tell you which ones (in addition to JSON syntax)

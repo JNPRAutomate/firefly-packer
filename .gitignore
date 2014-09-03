@@ -27,6 +27,8 @@ crash.log
 *.ova
 *.vmx
 *.vmdk
+*.vmsd
+*.vmxf
 
 # builds
 *.box
