@@ -1,10 +1,11 @@
 {
   "builders": [
     {
-      "boot_wait": "60s",
+      "type": "vmware-vmx",
+      "boot_wait": "120s",
       "boot_command": [
         "root<enter><wait5>",
-        "chown -R root /cf/root *<wait15>",
+        "chown -R root /cf/root/<enter><wait10>",
         "cli<enter><wait><wait>",
         "conf<enter><wait>",
         "set system services netconf ssh<enter><wait>",
@@ -20,7 +21,6 @@
         "commit and-quit<enter><wait10>",
         "exit<enter><wait>"
       ],
-      "type": "vmware-vmx",
       "source_path": "../images/firefly/vmx/X46-D20.5/junos-vsrx-12.1X46-D20.5-domestic.vmx",
       "ssh_username": "root",
       "ssh_password": "Juniper",
@@ -32,10 +32,11 @@
       }
     },
     {
+      "type": "virtualbox-ovf",
       "boot_wait": "60s",
       "boot_command": [
         "root<enter><wait5>",
-        "chown -R /cf/root *<enter><wait15>",
+        "chown -R root /cf/root/<enter><wait10>",
         "sysctl -w net.inet.ip.mcast_ttl=64<enter><wait5>",
         "echo \"#!/sbin/sh\" >> /etc/rc.custom<enter><wait>",
         "echo \"sysctl -w net.inet.ip.mcast_ttl=64\" >> /etc/rc.custom<enter><wait>",
@@ -55,7 +56,6 @@
         "commit and-quit<enter><wait10>",
         "exit<enter><wait>"
       ],
-      "type": "virtualbox-ovf",
       "guest_additions_mode": "disable",
       "source_path": "../images/firefly/fixedova/junos-vsrx-12.1X46-D20.5-domestic.ova",
       "ssh_username": "root",
