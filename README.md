@@ -54,3 +54,10 @@ Since these boxes are designed to use NAT networks with port forwarding for acce
 ##Issues
 
 Please open any issues on the [firefly-packer github issue tracker](https://github.com/JNPRAutomate/firefly-packer/issues).  Please make sure you've checked out the common issues before opening a ticket.
+
+##TODO
+Look into performance tuning options
+
+Setting kern.hz in /boot/loader.conf. Currently set to 200, reducing latency it should be set to 1000. https://www.freebsd.org/doc/handbook/virtualization-guest.html 
+
+On VTY to Flowd: set i386 ft_sleep disable
