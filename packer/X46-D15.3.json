@@ -13,6 +13,7 @@
     "template_path": "vagrantfiles",
     "vagrant_insecure_public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key",
     "vagrant_user":  "vagrant",
+    "vmware_nic1_network": "hostonly",
     "vmware_nic2_network": "hostonly",
     "vmware_nic3_network": "hostonly",
     "vmware_nic4_network": "hostonly",
@@ -21,16 +22,13 @@
     "vmware_nic7_network": "hostonly",
     "vmware_nic8_network": "hostonly",
     "vmware_nic9_network": "hostonly",
-    "vmware_nic10_network": "hostonly",
     "virtualbox_nic2_network":  "intnet",
     "virtualbox_nic3_network":  "intnet",
     "virtualbox_nic4_network":  "intnet",
     "virtualbox_nic5_network":  "intnet",
     "virtualbox_nic6_network":  "intnet",
     "virtualbox_nic7_network":  "intnet",
-    "virtualbox_nic8_network":  "intnet",
-    "virtualbox_nic9_network":  "intnet",
-    "virtualbox_nic10_network": "intnet"
+    "virtualbox_nic8_network":  "intnet"
   },
   "builders": [
     {
@@ -54,7 +52,7 @@
         "commit and-quit<enter><wait10>",
         "exit<enter><wait>"
       ],
-      "source_path": "{{user `source_path`}}/{{user `version`}}/junos-{{user `product`}}-{{user `version`}}-{{user `suffix`}}.vmx",
+      "source_path": "{{user `vmx_source_path`}}/{{user `junos_version`}}/junos-{{user `product`}}-{{user `junos_version`}}-{{user `suffix`}}.vmx",
       "ssh_username": "root",
       "ssh_password": "Juniper",
       "vnc_port_min": "5800",
@@ -80,9 +78,7 @@
         "ethernet8.present": "true",
         "ethernet8.connectionType": "{{user `vmware_nic8_network`}}",
         "ethernet9.present": "true",
-        "ethernet9.connectionType": "{{user `vmware_nic9_network`}}",
-        "ethernet10.present": "true",
-        "ethernet10.connectionType":"{{user `vmware_nic10_network`}}"
+        "ethernet9.connectionType": "{{user `vmware_nic9_network`}}"
       }
     },
     {
@@ -108,7 +104,7 @@
         "exit<enter><wait>"
       ],
       "guest_additions_mode": "disable",
-      "source_path": "{{user `ova_source_path`}}/junos-{{user `product`}}-{{user `version`}}-{{user `suffix`}}.ova",
+      "source_path": "{{user `ova_source_path`}}/junos-{{user `product`}}-{{user `junos_version`}}-{{user `suffix`}}.ova",
       "ssh_username": "root",
       "ssh_password": "Juniper",
       "shutdown_command": "shutdown -p now",
@@ -148,8 +144,8 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "{{user `output_path`}}/{{.Provider}}/junos-{{user `product`}}-{{user `version`}}-{{.Provider}}.box",
-      "vagrantfile_template": "{{user `template_path`}}/{{user `version`}}.rb"
+      "output": "{{user `output_path`}}/{{.Provider}}/junos-{{user `product`}}-{{user `junos_version`}}-{{.Provider}}.box",
+      "vagrantfile_template": "{{user `template_path`}}/{{user `junos_version`}}.rb"
     }
   ],
   "provisioners": [
