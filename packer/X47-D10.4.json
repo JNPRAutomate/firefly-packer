@@ -36,7 +36,7 @@
       "boot_wait": "{{user `vmware_boot_wait`}}",
       "boot_command": [
         "root<enter><wait5>",
-        "chown -R root /cf/root/<enter><wait10>",
+        "chown -R root:wheel /cf/root/<enter><wait10>",
         "cli<enter><wait><wait>",
         "conf<enter><wait>",
         "set system services netconf ssh<enter><wait>",
@@ -155,9 +155,17 @@
       "destination": "/etc/rc.custom"
     },
     {
+      "type": "file",
+      "source": "scripts/junos/loader.conf",
+      "destination": "/boot/loader.conf"
+    },
+    {
       "type": "shell",
       "inline_shebang": "#!/bin/sh -x",
-      "inline": [ "chmod 700 /etc/rc.custom" ]
+      "inline": [
+        "chmod 700 /etc/rc.custom",
+        "chown -R root:wheel /boot" 
+      ]
     },
     {
       "type": "shell",
