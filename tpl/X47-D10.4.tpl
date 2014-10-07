@@ -14,7 +14,6 @@ Vagrant.configure('2') do |config|
   # changing default from Vagrant to root, since OS detection requires a shell
   # should continue to use Vagrant insecure default public key
   config.ssh.username = 'root'
-  # use tcsh as login shell (as /bin/csh -l)
-  # yes, it's really tcsh
-  config.ssh.shell = 'csh -l'
+  # use bourne shell (instead of bash)
+  config.ssh.shell = 'sh'
 end
