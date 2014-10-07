@@ -1,13 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# TODO: add plugin checks for netconf and jprovision
-unless Vagrant.has_plugin?('vagrant-junos')
-  fail "vagrant-junos is not installed!  Install with \'vagrant plugin install vagrant-junos\'"
-end
-
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = 'juniper/ffp-12.1X47-D10.4'
+Vagrant.configure('2') do |config|
+  config.vm.box = 'juniper/ffp-12.1X46-D20.5'
   # Disable the default shared folder between the guest and host
   # Shared folders are not supported, since Junos doesn't support openvmtools
   # If removed, Vagrant will hang at the end of box instantiation
@@ -22,4 +17,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # use tcsh as login shell (as /bin/csh -l)
   # yes, it's really tcsh
   config.ssh.shell = 'csh -l'
- end
+end

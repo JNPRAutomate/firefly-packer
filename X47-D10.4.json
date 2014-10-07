@@ -1,16 +1,17 @@
 {
   "variables": {
     "product": "vsrx",
-    "junos_version": "X46-D20.5",
+    "junos_release": "12.1",
+    "junos_version": "X47-D10.4",
     "suffix": "domestic",
     "box_version": "0.1.3",
     "box_version_description": "User variables, interfaces and file + shell provisioners",
     "vmware_boot_wait": "60s",
     "virtualbox_boot_wait": "60s",
-    "vmx_source_path": "../images/firefly/vmx",
-    "ova_source_path": "../images/firefly/fixedova",
-    "output_path": "../builds",
-    "template_path": "vagrantfiles",
+    "vmx_source_path": "./images/vmx",
+    "ova_source_path": "./images/fixedova",
+    "output_path": "./builds",
+    "template_path": "./vagrantfiles",
     "vagrant_insecure_public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key",
     "vagrant_user":  "vagrant",
     "vmware_nic1_network": "hostonly",
@@ -36,7 +37,7 @@
       "boot_wait": "{{user `vmware_boot_wait`}}",
       "boot_command": [
         "root<enter><wait5>",
-        "chown -R root:wheel /cf/root/<enter><wait10>",
+        "chown -R root:wheel /cf/root<enter><wait5>",
         "cli<enter><wait><wait>",
         "conf<enter><wait>",
         "set system services netconf ssh<enter><wait>",
@@ -52,7 +53,7 @@
         "commit and-quit<enter><wait10>",
         "exit<enter><wait>"
       ],
-      "source_path": "{{user `vmx_source_path`}}/{{user `junos_version`}}/junos-{{user `product`}}-{{user `junos_version`}}-{{user `suffix`}}.vmx",
+      "source_path": "{{user `vmx_source_path`}}/{{user `junos_version`}}/junos-{{user `product`}}-{{user `junos_release`}}{{user `junos_version`}}-{{user `suffix`}}.vmx",
       "ssh_username": "root",
       "ssh_password": "Juniper",
       "vnc_port_min": "5800",
@@ -86,7 +87,7 @@
       "boot_wait": "{{user `virtualbox_boot_wait`}}",
       "boot_command": [
         "root<enter><wait5>",
-        "chown -R root /cf/root/<enter><wait10>",
+        "chown -R root:wheel /cf/root<enter><wait5>",
         "sysctl -w net.inet.ip.mcast_ttl=64<enter><wait5>",
         "cli<enter><wait><wait>",
         "conf<enter><wait>",
@@ -104,7 +105,7 @@
         "exit<enter><wait>"
       ],
       "guest_additions_mode": "disable",
-      "source_path": "{{user `ova_source_path`}}/junos-{{user `product`}}-{{user `junos_version`}}-{{user `suffix`}}.ova",
+      "source_path": "{{user `ova_source_path`}}/junos-{{user `product`}}-{{user `junos_release`}}{{user `junos_version`}}-{{user `suffix`}}.ova",
       "ssh_username": "root",
       "ssh_password": "Juniper",
       "shutdown_command": "shutdown -p now",
@@ -115,25 +116,25 @@
          ["modifyvm", "{{.Name}}", "--nic1", "nat"],
          ["modifyvm", "{{.Name}}", "--nicpromisc1", "allow-all"],
          ["modifyvm", "{{.Name}}", "--nictype2", "virtio"],
-         ["modifyvm", "{{.Name}}", "--nic2", "{{user `nic2_network`}}"],
+         ["modifyvm", "{{.Name}}", "--nic2", "{{user `virtualbox_nic2_network`}}"],
          ["modifyvm", "{{.Name}}", "--nicpromisc2", "allow-all"],
          ["modifyvm", "{{.Name}}", "--nictype3", "virtio"],
-         ["modifyvm", "{{.Name}}", "--nic3", "{{user `nic3_network`}}"],
+         ["modifyvm", "{{.Name}}", "--nic3", "{{user `virtualbox_nic3_network`}}"],
          ["modifyvm", "{{.Name}}", "--nicpromisc3", "allow-all"],
          ["modifyvm", "{{.Name}}", "--nictype4", "virtio"],
-         ["modifyvm", "{{.Name}}", "--nic4", "{{user `nic4_network`}}"],
+         ["modifyvm", "{{.Name}}", "--nic4", "{{user `virtualbox_nic4_network`}}"],
          ["modifyvm", "{{.Name}}", "--nicpromisc4", "allow-all"],
          ["modifyvm", "{{.Name}}", "--nictype5", "virtio"],
-         ["modifyvm", "{{.Name}}", "--nic5", "{{user `nic5_network`}}"],
+         ["modifyvm", "{{.Name}}", "--nic5", "{{user `virtualbox_nic5_network`}}"],
          ["modifyvm", "{{.Name}}", "--nicpromisc5", "allow-all"],
          ["modifyvm", "{{.Name}}", "--nictype6", "virtio"],
-         ["modifyvm", "{{.Name}}", "--nic6", "{{user `nic6_network`}}"],
+         ["modifyvm", "{{.Name}}", "--nic6", "{{user `virtualbox_nic6_network`}}"],
          ["modifyvm", "{{.Name}}", "--nicpromisc6", "allow-all"],
          ["modifyvm", "{{.Name}}", "--nictype7", "virtio"],
-         ["modifyvm", "{{.Name}}", "--nic7", "{{user `nic7_network`}}"],
+         ["modifyvm", "{{.Name}}", "--nic7", "{{user `virtualbox_nic7_network`}}"],
          ["modifyvm", "{{.Name}}", "--nicpromisc7", "allow-all"],
          ["modifyvm", "{{.Name}}", "--nictype8", "virtio"],
-         ["modifyvm", "{{.Name}}", "--nic8", "{{user `nic8_network`}}"],
+         ["modifyvm", "{{.Name}}", "--nic8", "{{user `virtualbox_nic8_network`}}"],
          ["modifyvm", "{{.Name}}", "--nicpromisc8", "allow-all"],
          ["modifyvm", "{{.Name}}", "--boot1", "disk"],
          ["modifyvm", "{{.Name}}", "--uart1", "0x3F8", "4"],
@@ -145,24 +146,19 @@
     {
       "type": "vagrant",
       "output": "{{user `output_path`}}/{{.Provider}}/junos-{{user `product`}}-{{user `junos_version`}}-{{.Provider}}.box",
-      "vagrantfile_template": "{{user `template_path`}}/{{user `junos_version`}}.rb"
+      "vagrantfile_template": "./tpl/X47-D10.4.tpl"
     }
   ],
   "provisioners": [
     {
       "type": "file",
       "source": "scripts/junos/rc.custom",
-      "destination": "/etc/rc.custom"
+      "destination": "/cf/etc/rc.custom"
     },
     {
-      "type": "shell",
-      "inline_shebang": "#!/bin/sh -x",
-      "inline": [ "chmod 700 /etc/rc.custom" ]
-    },
-    {
-      "type": "shell",
-      "inline_shebang": "#!/bin/cli -f",
-      "script": "scripts/junos/configure_nics.conf"
+      "type": "file",
+      "source": "scripts/junos/loader.conf",
+      "destination": "/cf/boot/loader.conf"
     }
   ]
 }
