@@ -158,6 +158,10 @@
       "type": "file",
       "source": "scripts/junos/loader.conf",
       "destination": "/cf/boot/loader.conf"
+    },
+    {
+      "type": "shell",
+      "inline": ["chmod 0744 /cf/etc/rc.custom"]
     }
   ]
 }
