@@ -57,7 +57,7 @@
       "ssh_password": "Juniper",
       "vnc_port_min": "5800",
       "vnc_port_max": "5900",
-      "shutdown_command": "shutdown -p now",
+      "shutdown_command": "echo 'shutdown -p now' > shutdown.sh; chmod 755 shutdown.sh; sh shutdown.sh",
       "vmx_data": {
         "ethernet0.connectionType": "nat",
         "ethernet1.present": "true",
@@ -107,7 +107,7 @@
       "source_path": "{{user `ova_source_path`}}/junos-{{user `product`}}-{{user `junos_release`}}{{user `junos_version`}}-{{user `suffix`}}.ova",
       "ssh_username": "root",
       "ssh_password": "Juniper",
-      "shutdown_command": "shutdown -p now",
+      "shutdown_command": "echo 'shutdown -p now' > shutdown.sh; chmod 755 shutdown.sh; sh shutdown.sh",
       "vboxmanage": [
          ["modifyvm", "{{.Name}}", "--memory", "2048"],
          ["modifyvm", "{{.Name}}", "--cpus", "2"],
@@ -161,6 +161,8 @@
     },
     {
       "type": "shell",
+      "inline_shebang": "#!/bin/csh",
+      "execute_command": "cat {{.Path}}",
       "inline": ["chmod 0744 /cf/etc/rc.custom"]
     }
   ]
