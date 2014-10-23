@@ -37,6 +37,7 @@
       "boot_command": [
         "root<enter><wait5>",
         "chown -R root:wheel /cf/root<enter><wait10>",
+        "chown -R root:wheel /cf/etc<enter><wait10>",
         "cli<enter><wait><wait>",
         "conf<enter><wait>",
         "set system services netconf ssh<enter><wait>",
@@ -86,7 +87,8 @@
       "boot_wait": "{{user `virtualbox_boot_wait`}}",
       "boot_command": [
         "root<enter><wait5>",
-        "chown -R root:wheel /cf/root<enter><wait5>",
+        "chown -R root:wheel /cf/root<enter><wait10>",
+        "chown -R root:wheel /cf/etc<enter><wait10>",
         "sysctl -w net.inet.ip.mcast_ttl=64<enter><wait5>",
         "cli<enter><wait><wait>",
         "conf<enter><wait>",
@@ -163,7 +165,7 @@
       "type": "shell",
       "inline_shebang": "#!/bin/csh",
       "execute_command": "cat {{.Path}}",
-      "inline": ["chmod 0744 /cf/etc/rc.custom"]
+      "inline": ["chmod 0755 /cf/etc/rc.custom"]
     }
   ]
 }
