@@ -163,8 +163,11 @@
     },
     {
       "type": "shell",
-      "execute_command": "cat {{.Path}}",
-      "inline": ["chmod 0755 /cf/etc/rc.custom"]
+      "execute_command": "sh {{.Path}}",
+      "inline": [
+        "chmod 0755 /cf/etc/rc.custom",
+        "ls -la /cf/etc/rc.custom"
+      ]
     }
   ]
 }
