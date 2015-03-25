@@ -1,0 +1,3 @@
+SHA1(junos-vsrx-12.1X47-D20.7-domestic.ovf)= 84ac1549e6fe90cd9d5644c4e9de90ea5d567b2d
+SHA1(junos-vsrx-12.1X47-D20.7-domestic-disk1.vmdk)= 50d14999ca634cb19dcfd55879268eb2dda10b61
+SHA1(certchain.pem)= b7b59c6b62196283cbd8fe9253d8b7e5b56580fe
