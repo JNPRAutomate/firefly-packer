@@ -1,0 +1,42 @@
+---
+x46d10:
+  filename: junos-vsrx-12.1X46-D10.2-domestic.ova
+  download: "https://s3-us-west-2.amazonaws.com/junos-vsrx/junos-vsrx-12.1X46-D10.2-domestic.ova"
+  hash: fdb6bb5849ed5a697df1331d455905ad2ccbcb69c015ff1a5017dd9f451d97fe
+  version: X46-D10.2
+x46d15:
+  filename: junos-vsrx-12.1X46-D15.3.b-domestic.ova
+  download: "https://s3-us-west-2.amazonaws.com/junos-vsrx/junos-vsrx-12.1X46-D15.3.b-domestic.ova"
+  hash: 7e93c65f53652d9a6f7d368620478562eff887b0ce20cddf2a1e02689133d538
+  version: X46-D15.3
+  rename: junos-vsrx-12.1X46-D15.3-domestic.ova
+x46d20:
+  filename: junos-vsrx-12.1X46-D20.5-domestic.ova
+  download: "https://s3-us-west-2.amazonaws.com/junos-vsrx/junos-vsrx-12.1X46-D20.5-domestic.ova"
+  hash: 0d2298dc5b429da3d183f17ae49aa4c0869a64991fb711ff870d3007322ba37f
+  version: X46-D20.5
+x46d25:
+  filename: junos-vsrx-12.1X46-D25.7-domestic.ova
+  download: "https://s3-us-west-2.amazonaws.com/junos-vsrx/junos-vsrx-12.1X46-D25.7-domestic.ova"
+  hash: 5cc3b1a252e08306b233b9511783fe96875989368dcd58b2ff71634d7f472277
+  version: X46-D25.7
+x46d30:
+  filename: junos-vsrx-12.1X46-D30.2-domestic.ova
+  download: "https://s3-us-west-2.amazonaws.com/junos-vsrx/junos-vsrx-12.1X46-D30.2-domestic.ova"
+  hash: f058fb2cdd6cfe0642cf09df9d49f3b54b67c4cd74909fb0d0a96bbec8b68c17
+  version: X46-D30.2
+x47d10:
+  filename: junos-vsrx-12.1X47-D10.4-domestic.ova
+  download: "https://s3-us-west-2.amazonaws.com/junos-vsrx/junos-vsrx-12.1X47-D10.4-domestic.ova"
+  hash: 105b81db3661d857a5291ae92e08da4420787e4a4c5457293b0ec3df043f2174
+  version: X47-D10.4
+x47d15:
+  filename: junos-vsrx-12.X47-D15.4-domestic.ova
+  download: "https://s3-us-west-2.amazonaws.com/junos-vsrx/junos-vsrx-12.1X47-D15.4-domestic.ova"
+  hash: 2a5cfa9c0ee8897ea3eb9082d81ff3729c84e6f4b761908af064ca83e06790aa
+  version: X47-D15.4
+x47d20:
+  filename: junos-vsrx-12.X47-D20.7-domestic.ova
+  download: "https://s3-us-west-2.amazonaws.com/junos-vsrx/junos-vsrx-12.1X47-D20.7-domestic.ova"
+  hash: 1cd6d7afe1352eea7ddf7867d46142311dc8c15f3186d583377573cd40450c3c
+  version: X47-D20.7

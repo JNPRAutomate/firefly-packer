@@ -1,6 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+require "vagrant-host-shell"
+require "vagrant-junos"
+
 Vagrant.configure('2') do |config|
   config.vm.box = 'juniper/ffp-12.1X46-D10.2'
   # Disable the default shared folder between the guest and host

@@ -2,10 +2,10 @@
   "variables": {
     "product": "vsrx",
     "junos_release": "12.1",
-    "junos_version": "X46-D15.3",
+    "junos_version": "<%= @junos_version %>",
     "suffix": "domestic",
-    "box_version": "0.5.0",
-    "box_version_description": "functional-zone management + automated Atlas uploads",
+    "box_version": "<%= @box_version %>",
+    "box_version_description": "<%= @box_version_description %>",
     "vmware_boot_wait": "60s",
     "virtualbox_boot_wait": "60s",
     "vmx_source_path": "./images/vmx",
@@ -50,11 +50,20 @@
         "set system login user {{user `vagrant_user`}} class super-user<enter><wait>",
         "set system login user {{user `vagrant_user`}} authentication ssh-rsa \"{{user `vagrant_insecure_public_key`}}\"<enter><wait10>",
         "set interfaces ge-0/0/0.0 family inet dhcp<enter><wait>",
-        "delete security zones security-zone untrust interfaces ge-0/0/0.0<enter><wait>",
-        "set security zones functional-zone management interfaces ge-0/0/0.0 host-inbound-traffic protocols all<enter><wait>",
-        "set security zones functional-zone management interfaces ge-0/0/0.0 host-inbound-traffic system-services all<enter><wait>",
-        "commit and-quit<enter><wait10>",
-        "exit<enter><wait>"
+        <% if junos_config == :default -%>
+          "delete security zones security-zone untrust interfaces ge-0/0/0.0<enter><wait>",
+          "set security zones functional-zone management interfaces ge-0/0/0.0 host-inbound-traffic protocols all<enter><wait>",
+          "set security zones functional-zone management interfaces ge-0/0/0.0 host-inbound-traffic system-services all<enter><wait>",
+          "commit and-quit<enter><wait10>",
+          "exit<enter><wait>"
+        <% elsif junos_config == :packetmode -%>
+          "delete security<enter><wait5>",
+          "set security forwarding-options family mpls mode packet-based<enter><wait>",
+          "set security forwarding-options family inet6 mode packet-based<enter><wait>",
+          "commit and-quit<enter><wait10>",
+          "exit<enter><wait5>",
+          "reboot<enter><wait10><wait10><wait10><wait10><wait10><wait10>"
+        <% end -%>
       ],
       "source_path": "{{user `vmx_source_path`}}/{{user `junos_version`}}/junos-{{user `product`}}-{{user `junos_release`}}{{user `junos_version`}}-{{user `suffix`}}.vmx",
       "ssh_username": "root",
@@ -104,11 +113,20 @@
         "set system login user {{user `vagrant_user`}} class super-user<enter><wait>",
         "set system login user {{user `vagrant_user`}} authentication ssh-rsa \"{{user `vagrant_insecure_public_key`}}\"<enter><wait10>",
         "set interfaces ge-0/0/0.0 family inet dhcp<enter><wait>",
-        "delete security zones security-zone untrust interfaces ge-0/0/0.0<enter><wait>",
-        "set security zones functional-zone management interfaces ge-0/0/0.0 host-inbound-traffic protocols all<enter><wait>",
-        "set security zones functional-zone management interfaces ge-0/0/0.0 host-inbound-traffic system-services all<enter><wait>",
-        "commit and-quit<enter><wait10>",
-        "exit<enter><wait>"
+        <% if junos_config == :default -%>
+          "delete security zones security-zone untrust interfaces ge-0/0/0.0<enter><wait>",
+          "set security zones functional-zone management interfaces ge-0/0/0.0 host-inbound-traffic protocols all<enter><wait>",
+          "set security zones functional-zone management interfaces ge-0/0/0.0 host-inbound-traffic system-services all<enter><wait>",
+          "commit and-quit<enter><wait10>",
+          "exit<enter><wait>"
+        <% elsif junos_config == :packetmode -%>
+          "delete security<enter><wait5>",
+          "set security forwarding-options family mpls mode packet-based<enter><wait>",
+          "set security forwarding-options family inet6 mode packet-based<enter><wait>",
+          "commit and-quit<enter><wait10>",
+          "exit<enter><wait5>",
+          "reboot<enter><wait10><wait10><wait10><wait10><wait10><wait10><wait10>"
+        <% end -%>
       ],
       "guest_additions_mode": "disable",
       "source_path": "{{user `ova_source_path`}}/junos-{{user `product`}}-{{user `junos_release`}}{{user `junos_version`}}-{{user `suffix`}}.ova",
@@ -121,7 +139,7 @@
          ["modifyvm", "{{.Name}}", "--vram", "10"],
          ["modifyvm", "{{.Name}}", "--nictype1", "virtio"],
          ["modifyvm", "{{.Name}}", "--nic1", "nat"],
-         ["modifyvm", "{{.Name}}", "--nicpromisc1", "allow-all"],
+         ["modifyvm", "{{.Name}}", "--nicpromisc1", "allow-all"],w
          ["modifyvm", "{{.Name}}", "--nictype2", "virtio"],
          ["modifyvm", "{{.Name}}", "--nic2", "{{user `virtualbox_nic2_network`}}"],
          ["modifyvm", "{{.Name}}", "--nicpromisc2", "allow-all"],
@@ -153,7 +171,7 @@
     {
       "type": "vagrant",
       "output": "{{user `output_path`}}/{{.Provider}}/junos-{{user `product`}}-{{user `junos_version`}}-{{.Provider}}.box",
-      "vagrantfile_template": "./tpl/X46-D15.3.tpl"
+      "vagrantfile_template": "./tpl/<%= @junos_version %>.tpl"
     }
   ],
   "provisioners": [

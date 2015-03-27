@@ -19,7 +19,6 @@ _yardoc
 doc/
 
 # packer
-packer/packer_cache/
 packer_cache/
 crash.log
 
@@ -29,6 +28,7 @@ crash.log
 *.vmdk
 *.vmsd
 *.vmxf
+*.lck
 
 # builds
 *.box

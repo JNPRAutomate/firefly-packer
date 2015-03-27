@@ -5,7 +5,7 @@ require "vagrant-host-shell"
 require "vagrant-junos"
 
 Vagrant.configure('2') do |config|
-  config.vm.box = 'juniper/ffp-12.1X47-D10.4'
+  config.vm.box = 'juniper/ffp-12.1X47-D15.4'
   # Disable the default shared folder between the guest and host
   # Shared folders are not supported, since Junos doesn't support openvmtools
   # If removed, Vagrant will hang at the end of box instantiation

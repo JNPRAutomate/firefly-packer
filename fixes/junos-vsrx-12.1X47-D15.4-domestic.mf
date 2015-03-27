@@ -1,0 +1,2 @@
+SHA1(junos-vsrx-12.1X47-D15.4-domestic.ovf)= 9cfaf6523d9f9a51f5d78eb3c8bd45948b36ab10
+SHA1(junos-vsrx-12.1X47-D15.4-domestic-disk1.vmdk)= 057d5ed582f4e4960d2370b5ddc6c57cb4f71787

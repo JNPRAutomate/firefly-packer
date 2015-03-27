@@ -3,4 +3,5 @@
 *.ovf
 *.vmdk
 *.cert
+*.lck
 certchain.pem

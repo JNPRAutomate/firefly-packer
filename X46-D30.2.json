@@ -2,7 +2,7 @@
   "variables": {
     "product": "vsrx",
     "junos_release": "12.1",
-    "junos_version": "X46-D15.3",
+    "junos_version": "X46-D30.2",
     "suffix": "domestic",
     "box_version": "0.5.0",
     "box_version_description": "functional-zone management + automated Atlas uploads",
@@ -153,7 +153,7 @@
     {
       "type": "vagrant",
       "output": "{{user `output_path`}}/{{.Provider}}/junos-{{user `product`}}-{{user `junos_version`}}-{{.Provider}}.box",
-      "vagrantfile_template": "./tpl/X46-D15.3.tpl"
+      "vagrantfile_template": "./tpl/X46-D30.2.tpl"
     }
   ],
   "provisioners": [
