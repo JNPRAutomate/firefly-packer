@@ -170,8 +170,13 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "{{user `output_path`}}/{{.Provider}}/junos-{{user `product`}}-{{user `junos_version`}}-{{.Provider}}.box",
-      "vagrantfile_template": "./tpl/<%= @junos_version %>.tpl"
+      <% if junos_config == :default -%>
+        "output": "{{user `output_path`}}/{{.Provider}}/junos-{{user `product`}}-{{user `junos_version`}}-{{.Provider}}.box",
+        "vagrantfile_template": "./tpl/<%= @junos_version %>.tpl"
+      <% elsif junos_config == :packetmode -%>
+        "output": "{{user `output_path`}}/{{.Provider}}/junos-{{user `product`}}-{{user `junos_version`}}-{{.Provider}}-packetmode.box",
+        "vagrantfile_template": "./tpl/<%= @junos_version %>-packetmode.tpl"
+      <% end -%>
     }
   ],
   "provisioners": [
